@@ -1,23 +1,39 @@
 import React from 'react';
 import logo from './logo.svg';
-import './App.css';
+
+import Skeleton from './Skeleton';
+
+import styles from './App.module.css';
+
+const sizes = [
+  {
+    w: '100%',
+    h: 40,
+  },
+  {
+    w: 284,
+    h: 26,
+  },
+];
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+    <div className={styles.App}>
+      <header className={styles['App-header']}>
+        <img src={logo} className={styles["App-logo"]} alt="logo" />
         <p>
           Edit <code>src/App.tsx</code> and save to reload.
         </p>
         <a
-          className="App-link"
+          className={styles["App-link"]}
           href="https://reactjs.org"
           target="_blank"
           rel="noopener noreferrer"
         >
           Learn React
         </a>
+
+        <Skeleton skeletonSizes={sizes} className={styles.abs} wrapperClassName={styles.test} wrapperTag='ul' animation='wave' />
       </header>
     </div>
   );
