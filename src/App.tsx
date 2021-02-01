@@ -34,6 +34,9 @@ function App() {
         </a>
 
         <Skeleton skeletonSizes={sizes} className={styles.abs} wrapperClassName={styles.test} wrapperTag='ul' animation='wave' />
+
+        <Skeleton width={50} height={30} />
+        <Skeleton width={50} height={20} circle/>
       </header>
     </div>
   );

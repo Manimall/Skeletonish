@@ -4,7 +4,7 @@
   }
 
   50% {
-    opacity: 0.4;
+    opacity: .4;
   }
 
   100% {
@@ -12,7 +12,8 @@
   }
 }
 
-@keyframes wave {
+/* //TODO: check performance */
+@keyframes gradient {
   0% {
     background-position: 0% 0%;
   }
@@ -22,25 +23,42 @@
   }
 }
 
-.skeletonWrapper {
-  width: 100%;
+@keyframes wave {
+  0% {
+    transform: translateX(-100%);
+  }
 
+  60% {
+    transform: translateX(100%);
+  }
+
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.skeletonWrapper {
   margin: 0;
   padding: 0;
+
+  line-height: 1;
 }
 
 .skeleton {
   display: inline-block;
 
+  /* // default width */
   width: 100%;
+  /* // default height */
+  height: 16px;
   line-height: 1;
 
-  background-color: #eeeeee;
+  background-color: #eee;
   background-image: linear-gradient(
     90deg,
-    #eeeeee,
+    #eee,
     #f5f5f5,
-    #eeeeee
+    #eee
   );
   background-size: 200px 100%;
   background-repeat: no-repeat;
@@ -48,32 +66,61 @@
   border-radius: 4px;
 
   /* it's better to give margins via skeleton's className */
+
   /* margin-bottom: 4px; */
 }
 
-.waveSkeleton {
+.gradientSkeleton {
   background-image: linear-gradient(
     -90deg,
-    rgba(223, 226, 228, 0.72) 0%,
-    rgba(223, 226, 228, 0.6) 50%,
-    rgba(223, 226, 228, 0.72) 100%
+    rgba(223, 226, 228, .72) 0%,
+    rgba(223, 226, 228, .6) 50%,
+    rgba(223, 226, 228, .72) 100%
   );
-  background-color: rgba(223, 226, 228, 0.72);
+  background-color: rgba(223, 226, 228, .72);
   background-size: 400% 400%;
 
-  animation: wave 3s ease-in-out infinite;
+  animation: gradient 3s ease-in-out infinite;
 }
 
 .pulseSkeleton {
   background-color: #0000001c;
   background-image: none;
 
-  animation: pulse 1.5s ease-in-out 0.5s infinite;
+  animation: pulse 1.5s ease-in-out .2s infinite;
 }
 
+.waveSkeleton {
+  overflow: hidden;
+  position: relative;
+
+  background-color: rgba(0, 0, 0, .11);
+  background-image: none;
+}
+
+.waveSkeleton::after {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  content: "";
+  position: absolute;
+
+  transform: translateX(-100%);
+  background: linear-gradient(90deg, transparent, rgba(0, 0, 0, .04), transparent);
+
+  animation: wave 1.6s linear .5s infinite;
+}
+
+/* // styles if skeleton is Array */
 .skeletonArray {
   display: flex;
   flex-direction: column;
+}
+
+.skeletonArray span {
+  flex: 1 1 auto;
+  height: 20px;
 }
 
 .skeletonWrapperDirection {
